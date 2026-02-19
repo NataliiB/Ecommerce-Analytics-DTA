@@ -5,8 +5,7 @@ env/
 __pycache__/
 *.py[cod]
 
-data/*.csv
-data/*.xlsx
+data/
 
 .DS_Store
 Thumbs.db

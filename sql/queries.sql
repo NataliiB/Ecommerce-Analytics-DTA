@@ -45,7 +45,7 @@ ORDER BY order_value DESC
 LIMIT 10;
 
 
---Task#5 Customer geography
+--Task#5 Users geography
 
 SELECT country,
        COUNT(DISTINCT id) AS quantity
