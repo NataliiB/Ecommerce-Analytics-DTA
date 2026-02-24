@@ -51,4 +51,5 @@ SELECT country,
        COUNT(DISTINCT id) AS quantity
 FROM `bigquery-public-data.thelook_ecommerce.users`
 GROUP BY country
-HAVING COUNT(DISTINCT id) > 500;
+HAVING COUNT(DISTINCT id) > 500
+ORDER BY quantity;
