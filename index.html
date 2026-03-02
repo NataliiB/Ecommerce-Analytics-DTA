@@ -1,148 +1,272 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecommerce Strategy Dashboard</title>
+    <title>Nataliia | Data Analyst Portfolio</title>
     <style>
         :root {
             --bg-body: #f5f7f9;
             --border-color: #e1e4e8;
             --text-title: #1a1f36;
+            --text-main: #4f566b;
             --accent-blue: #007bff;
+            --white: #ffffff;
+        }
+
+        /* Ключове виправлення прокрутки */
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Заборона горизонтальної прокрутки на рівні всієї сторінки */
         }
 
         body { 
-            font-family: -apple-system, system-ui, sans-serif; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
             background-color: var(--bg-body); 
-            margin: 0; 
-            padding: 40px 20px; /* Відступи зверху та знизу для візуального комфорту */
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Центрування по горизонталі для всього body */
+            color: var(--text-main);
+            line-height: 1.6;
         }
 
         .container { 
             width: 100%;
-            max-width: 1484px; /* Має збігатися з шириною Breite в Tableau */
-            margin: 0 auto; /* Центрування контейнера */
+            max-width: 1400px; /* Збільшено для кращого вигляду дашборду */
+            margin: 0 auto; 
+            padding: 40px 25px;
         }
 
-        header { 
-            text-align: center; /* Центрування тексту заголовка */
-            margin-bottom: 32px; 
-            padding-bottom: 16px; 
-            border-bottom: 1px solid var(--border-color); 
+        /* About Me Section */
+        .intro-card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
 
-        h1 { font-size: 24px; font-weight: 600; margin: 0; color: var(--text-title); }
+        .intro-text { flex: 2; }
+        .intro-photo { 
+            flex: 1; 
+            min-width: 250px;
+            max-width: 300px;
+            aspect-ratio: 1/1; 
+            background: #e1e4e8; 
+            border-radius: 50%; 
+            overflow: hidden;
+            border: 4px solid var(--white);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .intro-photo img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* KPI блок з вирівнюванням */
+        h1 { font-size: 36px; color: var(--text-title); margin-bottom: 16px; }
+        h2 { font-size: 28px; color: var(--text-title); margin: 60px 0 24px; text-align: center; }
+
+        .about-p { font-size: 19px; color: var(--text-main); margin-bottom: 24px; }
+        
+        .social-links a {
+            text-decoration: none;
+            color: var(--accent-blue);
+            font-weight: 600;
+            margin-right: 25px;
+            font-size: 16px;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 6px solid var(--accent-blue);
+            margin-bottom: 60px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .toc ol { margin: 0; padding-left: 20px; }
+        .toc li { margin-bottom: 12px; font-weight: 500; font-size: 17px; }
+
+        /* Slider Styles */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .slides { display: none; width: 100%; }
+        .slides img { width: 100%; height: auto; display: block; }
+        .slide-content { padding: 20px; text-align: center; background: #fff; font-weight: 600; border-top: 1px solid #eee; }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(26, 31, 54, 0.7);
+            color: white;
+            padding: 16px;
+            cursor: pointer;
+            border: none;
+            z-index: 10;
+        }
+        .next { right: 0; border-radius: 4px 0 0 4px; }
+        .prev { left: 0; border-radius: 0 4px 4px 0; }
+
+        /* KPI & Tableau Container */
         .metrics-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1px;
             background-color: var(--border-color);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 30px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 24px;
         }
+        .metric-card { background: white; padding: 30px; text-align: center; }
+        .metric-label { font-size: 13px; color: #697386; font-weight: 600; text-transform: uppercase; margin-bottom: 8px; }
+        .metric-value { font-size: 32px; font-weight: 700; color: var(--accent-blue); }
 
-        .metric-card { 
-            background: white; 
-            padding: 24px; 
-            text-align: center; /* Центрування цифр всередині карток */
-        }
-
-        .metric-label { font-size: 12px; color: #697386; font-weight: 600; text-transform: uppercase; margin-bottom: 10px; }
-        .metric-value { font-size: 28px; font-weight: 700; color: var(--accent-blue); }
-
-        /* Основний контейнер для Tableau */
+        /* Повне пригнічення прокрутки для Tableau */
         .content-card {
             background: white;
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 0;
-            margin-bottom: 40px;
-            overflow: hidden !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Центрування вмісту всередині карти */
-        }
-
-        .card-header { 
+            overflow: hidden; /* Обрізає все, що стирчить */
             width: 100%;
-            padding: 18px 20px; 
-            border-bottom: 1px solid var(--border-color); 
-            font-weight: 700; 
-            font-size: 13px; 
-            color: #697386; 
-            text-transform: uppercase; 
-            background-color: #fafbfc;
-            box-sizing: border-box;
-            text-align: left; /* Заголовок секції зазвичай залишають зліва */
+            max-width: 100%;
+            position: relative;
+            margin-bottom: 60px;
         }
 
         #tableau-viz-wrapper {
-            width: 100%;
-            height: 1600px; /* Висота відповідно до вашого Minimum Höhe */
+            width: 100% !important;
+            overflow: hidden !important;
             display: flex;
-            justify-content: center; /* Центрування самого дашборду */
+            justify-content: center;
+        }
+
+        footer { text-align: center; padding: 100px 0; font-size: 32px; font-weight: 700; color: var(--text-title); }
+
+        @media (max-width: 900px) {
+            .intro-card { flex-direction: column; text-align: center; }
+            .intro-photo { width: 200px; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <header>
-        <h1>Ecommerce Performance Analysis</h1>
+    <header class="intro-card">
+        <div class="intro-text">
+            <h1>Hi, I'm Nataliia! 👋</h1>
+            <p class="about-p">
+                I am a <b>diligent, empathetic, and deeply engaged</b> Junior Data Analyst. I find fulfillment in data preparation and reporting, always remaining <b>result-oriented</b> to ensure that every insight creates a meaningful impact. 
+                Currently, I am further advancing my skills in SQL, Python, and data visualization to translate complex datasets into clear business strategies.
+            </p>
+            <div class="social-links">
+                <a href="#">LinkedIn</a>
+                <a href="#">GitHub</a>
+                <a href="mailto:your-email@example.com">Email Me</a>
+            </div>
+        </div>
+        <div class="intro-photo">
+            <img src="./images/image_1723124329851.png" alt="Nataliia">
+        </div>
     </header>
 
+    <section class="toc">
+        <h3>Contents:</h3>
+        <ol>
+            <li>SQL Research: BigQuery "thelook_ecommerce" Database Investigation</li>
+            <li>Dashboard Analysis: Patterns of Factors Influencing Revenue (Tableau)</li>
+            <li>Predictive Insight: Assessing the Impact of Age on Revenue using Linear Regression</li>
+        </ol>
+    </section>
+
+    <h2>1. SQL Investigation (Google BigQuery)</h2>
+    <div class="slider-container">
+        <div class="slides slide1"><img src="./images/sql-queries_presentation/Slide1.png" alt="SQL 1"><div class="slide-content">1/7: Methodology & Objectives</div></div>
+        <div class="slides slide1"><img src="./images/sql-queries_presentation/Slide2.png" alt="SQL 2"><div class="slide-content">2/7: Database Architecture</div></div>
+        <div class="slides slide1"><img src="./images/sql-queries_presentation/Slide3.png" alt="SQL 3"><div class="slide-content">3/7: Top Product Categories</div></div>
+        <div class="slides slide1"><img src="./images/sql-queries_presentation/Slide4.png" alt="SQL 3"><div class="slide-content">4/7: Top Product Categories</div></div>
+        <div class="slides slide1"><img src="./images/sql-queries_presentation/Slide5.png" alt="SQL 3"><div class="slide-content">5/7: Top Product Categories</div></div>
+        <div class="slides slide1"><img src="./images/sql-queries_presentation/Slide6.png" alt="SQL 3"><div class="slide-content">6/7: Top Product Categories</div></div>
+        <div class="slides slide1"><img src="./images/sql-queries_presentation/Slide7.png" alt="SQL 3"><div class="slide-content">7/7: Top Product Categories</div></div>
+        <button class="prev" onclick="plusSlides(-1, 'slide1')">&#10094;</button>
+        <button class="next" onclick="plusSlides(1, 'slide1')">&#10095;</button>
+    </div>
+
+    <h2>2. E-commerce Performance Analysis (Tableau)</h2>
     <div class="metrics-row">
-        <div class="metric-card">
-            <div class="metric-label">Total Revenue</div>
-            <div class="metric-value">$158.1M</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-label">Avg Order Value</div>
-            <div class="metric-value">$2,876</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-label">Total Reach</div>
-            <div class="metric-value">18.9M</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-label">Efficiency</div>
-            <div class="metric-value">8.85%</div>
-        </div>
+        <div class="metric-card"><div class="metric-label">Total Revenue</div><div class="metric-value">$158.1M</div></div>
+        <div class="metric-card"><div class="metric-label">Avg Order Value</div><div class="metric-value">$2,876</div></div>
+        <div class="metric-card"><div class="metric-label">Total Reach</div><div class="metric-value">18.9M</div></div>
+        <div class="metric-card"><div class="metric-label">Efficiency</div><div class="metric-value">8.85%</div></div>
     </div>
 
     <div class="content-card">
-        <div class="card-header">Interactive Analytics Platform</div>
         <div id="tableau-viz-wrapper">
-            <div class='tableauPlaceholder' id='viz1771834814268' style='position: relative; width: 100%;'>
+            <div class='tableauPlaceholder' id='viz1771834814268' style='position: relative; width: 100%; overflow: hidden;'>
                 <object class='tableauViz' style='display:none;'>
                     <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
                     <param name='name' value='EcommerceDataset_17712558139050/Dashboard2' />
                     <param name='tabs' value='no' />
                     <param name='toolbar' value='no' />
-                </object>
+                    <param name='sizeMode' value='fit' /> </object>
             </div>
             <script type='text/javascript'>
                 var divElement = document.getElementById('viz1771834814268');
                 var vizElement = divElement.getElementsByTagName('object')[0];
                 vizElement.style.width = '100%';
-                vizElement.style.height = '1600px'; 
+                vizElement.style.height = '1200px'; 
                 var scriptElement = document.createElement('script');
                 scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
                 vizElement.parentNode.insertBefore(scriptElement, vizElement);
             </script>
         </div>
     </div>
+
+    <h2>3. Linear Regression: Customer Age & Revenue</h2>
+    <div class="slider-container">
+        <div class="slides slide2"><img src="REG_1.png" alt="REG 1"><div class="slide-content">Step 1: Correlation Analysis</div></div>
+        <div class="slides slide2"><img src="REG_2.png" alt="REG 2"><div class="slide-content">Step 2: Model Coefficients</div></div>
+        <div class="slides slide2"><img src="REG_3.png" alt="REG 3"><div class="slide-content">Step 3: Final Recommendations</div></div>
+        <button class="prev" onclick="plusSlides(-1, 'slide2')">&#10094;</button>
+        <button class="next" onclick="plusSlides(1, 'slide2')">&#10095;</button>
+    </div>
+
+    <footer>Thank you for your attention!</footer>
 </div>
 
+<script>
+    var slideIndex = { slide1: 1, slide2: 1 };
+    showSlides(1, 'slide1');
+    showSlides(1, 'slide2');
+
+    function plusSlides(n, no) {
+        showSlides(slideIndex[no] += n, no);
+    }
+
+    function showSlides(n, no) {
+        var i;
+        var x = document.getElementsByClassName(no);
+        if (n > x.length) {slideIndex[no] = 1}    
+        if (n < 1) {slideIndex[no] = x.length}
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";  
+        }
+        x[slideIndex[no]-1].style.display = "block";  
+    }
+</script>
 </body>
 </html>

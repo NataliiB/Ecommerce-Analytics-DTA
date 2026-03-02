@@ -20,18 +20,9 @@ This project is a comprehensive data investigation structured in multiple stages
 
 We begin by exploring the **theLook eCommerce public dataset** using **SQL** to understand user behavior, sales patterns, and product performance.
 
-
 **Part 2 – Revenue & Customer Analysis**
 
- In this stage, transactional data is analyzed to evaluate revenue dynamics, customer behavior, and discount effectiveness.
-
- The analysis includes:
-
-- Monthly revenue trend analysis (since January 2022)  
-- Comparison of discounted vs. full-price purchases  
-- Customer segmentation by gender and age group  
-- Product category performance across demographics  
-- Identification of high-value customer segments  
+ In this stage, transactional data is analyzed to evaluate revenue dynamics, customer behavior, and discount effectiveness. 
 
 The results are presented in an interactive Tableau dashboard with key KPIs and filters to support executive-level decision-making.
 
@@ -46,7 +37,7 @@ The results are presented in an interactive Tableau dashboard with key KPIs and 
 * **Visualization:** Tableau, Power BI, Matplotlib, Seaborn.
 * **Predictive Modeling:** Scikit-learn, Statsmodels (Linear Regression / SM Models).
 
-## Part 1 – Data Exploration </summary>
+## Part 1 – Data Exploration
 <details>
 <summary> Task #1: Getting to Know Users </summary>
 
@@ -123,3 +114,166 @@ The resulting dataset serves as a clean foundation for revenue tracking, fulfill
 - **Most Expensive Orders:** $1,128.95 – $1,372.00  
 - **Top Countries by Users (>500):**  
   China (33,866), United States (22,731), Brazil (14,500), South Korea (5,420), France (4,652), United Kingdom (4,558)
+
+## Part 2 – Revenue & Customer Analysis
+
+<details>
+<summary>Data Preparation & EDA</summary>
+
+------
+ 
+Data preparation and cleaning for subsequent analysis of sales, discount effectiveness, and customer behavior.
+
+**ETL Steps & Initial Analysis**
+
+1. **Data Import & Structure**
+- 55,000 transactions with 13 attributes (5 numerical, 7 categorical).  
+- `Purchase Date` converted to datetime for time-series analysis.
+
+2. **Data Cleaning**
+- Duplicates removed – 0 found.  
+- Missing values in `Discount Name` (27,585) filled with `'No Discount'`.
+
+3. **Customer Demographics**
+- Gender: Female 33.55%, Male 32.9%, Other 33.54%.  
+- Age groups: 18–25 (29.87%), 25–45 (40.02%).
+
+4. **Geography**
+- Main cities: Mumbai 20.36%, Delhi 19.63%; top 4 cities account for 55% of all orders.
+
+5. **Financials**
+- Average transaction value: 3,012.94; Maximum: 8,394.83.  
+- VIP transactions (>8,000) identified – 52 records.
+
+6. **Anomalies**
+- 613 transactions (1.1%) with negative Net Amount due to discounts exceeding the gross amount.  
+- Added `is_overflow_discount` flag for correct exclusion from analytics without losing original data.
+</details>
+<details>
+<summary>Data Visualization (Tableau)</summary>
+  
+All financial insights are based on validated data. Transactions with discount values exceeding product price were excluded from revenue calculations to ensure accurate and reliable reporting.
+
+<details>
+<summary>1. Revenue Dynamic (2022–2024) </summary>
+
+**Task description:**  
+Construct a Line Chart of total sales by month, starting from January 2022 to the present. 
+
+> **Chart Screenshot:**
+> ![Revenue Dynamic (2022–2024)](./visuals/tableau/Monthly%20Sales%20(Sep%202022-Aug%202024).png)
+
+### Key Insights:
+
+* **Sustained Business Growth:** Revenue shows a consistent upward trajectory over the analyzed period. This indicates stable market expansion and the successful scaling of eCommerce operations.
+* **Strong Seasonal Performance:** December consistently delivers peak revenue results, with the highest performance recorded in December 2023 at **₹3.9M**. This confirms the high effectiveness of holiday campaigns and year-end sales strategies as primary revenue drivers.
+* **Predictable Post-Holiday Slowdown:** A recurring sales decline is observed each February, reaching the lowest point of approximately **~₹2.0M**. This reflects a typical post-season retail contraction.
+* **Strategic Opportunity:** The February dip presents a clear opportunity for implementing targeted customer retention programs or early-year promotional strategies to smooth out performance fluctuations.
+
+</details>
+
+<details>
+<summary>2. Impact of Discounts on Average Order Value (AOV)</summary>
+
+**Task description:**  
+Create a bar chart that compares the average check (net amount and gross amount) for purchases made with a discount (Discount Applied) and purchases made at full price. Add value labels to the chart. 
+
+> **Chart Screenshot:**
+> ![Impact of Discounts on Average Order Value (AOV)](./visuals/tableau/Impact%20of%20Discounts%20on%20AOV.png)
+
+### Key Insights:
+1. **Incentivizing Higher Spending:** The **Avg. Gross Amount** is higher for discounted orders ($3,174.0$) than for full-price orders ($3,106.9$). This suggests that discounts encourage customers to add more expensive items or more products to their cart (Upselling effect).
+2. **Revenue Trade-off:** While discounts increase the "gross" value of the basket, the **Avg. Net Amount** (actual revenue) drops by approximately **6.6%** compared to non-discounted orders ($2,901.2$ vs $3,106.9$).
+3. **Strategic Conclusion:** The current discount strategy is effective at increasing the transaction volume and basket size. However, the business should monitor whether the increase in the total number of orders compensates for the lower net profit margin per order.
+
+</details>
+<details>
+<summary>3. Customer Preferences by Age Group</summary>
+
+**Task description:**  
+Question: "What product categories (Electronics, Clothing, Home Decor, etc.) are popular across different age groups?" Choose the visualization type that best shows this relationship.
+
+> **Chart Screenshot:**
+> ![Impact of Discounts on Average Order Value (AOV)](./visuals/tableau/Customer%20Preferences%20by%20Age%20Group.png)
+
+### Key Insights:
+
+* **The Prime Segment:** The **25-45 age group** is the primary revenue driver, with a total gross amount exceeding **65M**. 
+* **Electronics Spending Leader:** This group (25-45) spends the most on Electronics in absolute terms—**20.1M**—which is significantly higher than any other demographic.
+* **Secondary Market:** The **18-25 group** follows as the second-largest segment, contributing **14.8M** to the Electronics category.
+* **Comparison of Demographics:** While younger and older groups (under 18 and 60+) have similar *proportional* interests, their *actual* financial contribution is much smaller (approx. **2-3M** per category).
+
+</details>
+</details>
+<details>
+<summary>Analytical Questions (Business Case)</summary>
+
+**Task description:**  
+Compare two groups of customers: Group A (men) and Group B (women). Also further divide these groups by age category.
+* Which group of customers brings the company more total revenue (Total net Revenue)?
+* Which group has the highest average check?
+* Which group is more likely to buy goods at a discount?
+
+> **Chart Screenshot:**
+> ![Impact of Discounts on Average Order Value (AOV)](./visuals/tableau/Net%20Revenue%20by%20Gender%20&%20Age%20Group.png)
+
+### Key Insights:
+
+- **Primary Revenue Driver:** The 25–45 age group generates the highest revenue — approximately **₹63.9M**.
+
+- **Balanced Gender Contribution (25–45):**
+  - Group A (Males): **₹21.1M**
+  - Group B (Females): **₹21.2M**
+  - Other: **₹21.6M**
+
+- **Minimal Gender Gap:** Less than **0.5%** difference between males and females in the top-performing segment.
+
+- **Secondary Segment:** The 18–25 age group contributes nearly **₹47M**, with similarly balanced gender distribution.
+
+- **Low-Engagement Segments:** Under 18 and 60+ groups generate the lowest revenue (around **₹8M** each), indicating limited engagement or growth potential.
+
+> **Chart Screenshot:**
+> ![Impact of Discounts on Average Order Value (AOV)](./visuals/tableau/Average%20Order%20Value%20by%20Age%20Group&Gender.png)
+
+### Key Insights
+
+- **Highest Overall AOV:** The **Other** category within the **25–45** age group has the highest Average Order Value at **₹2,942.1**.
+
+- **Leading Segment (Under 18):** Males show the highest AOV at **₹2,938.6**, compared to Females at **₹2,876.2**.
+
+- **Leading Segment (60+):** The **Other** gender leads with an AOV of **₹2,898.5**, slightly above Females at **₹2,892.7**.
+
+- **Lowest AOV:** Females aged **45–60** record the lowest average order value at **₹2,819.7**.
+
+- **Stable Pricing Pattern:** Most demographic segments fall within the **₹2,800–₹2,950** range, indicating a consistent and stable pricing strategy across groups.
+> **Chart Screenshot:**
+> ![Impact of Discounts on Average Order Value (AOV)](./visuals/tableau/Average%20Order%20Value%20by%20Age%20Group&Gender.png)
+
+### Key Insights
+
+- The **Under 18 (Other gender)** segment has the highest share of discounted orders, indicating the strongest price sensitivity among all demographic groups.
+
+- For the **Other gender**, discount affinity gradually decreases with age, suggesting that younger customers in this segment are significantly more promotion-driven.
+
+- Both **Male** and **Female** segments show increasing discount affinity with age, highlighting the growing importance of promotions for older customers.
+
+- The **Male** segment demonstrates a relatively stable and consistent upward trend across age groups.
+
+- The **Female** segment shows greater variability, though the overall direction also indicates increasing sensitivity to discounts with age.
+
+### Conclusion
+
+- **Revenue:** Men (Group A) and Women (Group B) generate nearly identical total revenue, with the 25–45 age group being the primary revenue driver overall. This indicates that age plays a more significant role than gender in revenue contribution.
+
+- **Average Order Value (AOV):** Differences in AOV between genders are minimal, with most segments falling within a narrow ₹2,800–₹2,950 range. This suggests a stable and consistent pricing structure across demographic groups.
+
+- **Discount Sensitivity:** Younger customers are generally more promotion-driven, particularly within the Other gender category. Among Men and Women, discount affinity increases with age, indicating stronger responsiveness to promotions in older segments.
+
+</details>
+
+<details>
+<summary>Linear regression</summary>
+
+</details>
+
+## Part 3 – Forecasting & Strategic Recommendations
