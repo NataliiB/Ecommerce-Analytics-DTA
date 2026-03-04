@@ -251,15 +251,17 @@ Compare two groups of customers: Group A (men) and Group B (women). Also further
 
 ### Key Insights
 
-- The **Under 18 (Other gender)** segment has the highest share of discounted orders, indicating the strongest price sensitivity among all demographic groups.
+- **Even Adoption Across Age Groups**  
+Discount usage is relatively consistent across all age categories, indicating broad appeal of promotional offers.
 
-- For the **Other gender**, discount affinity gradually decreases with age, suggesting that younger customers in this segment are significantly more promotion-driven.
+- **Minimal Gender Impact**  
+Gender does not appear to significantly influence discount utilization, suggesting that promotional strategies are equally effective across customer segments.
 
-- Both **Male** and **Female** segments show increasing discount affinity with age, highlighting the growing importance of promotions for older customers.
+- **Slight Increase in Older Segments**  
+A mild upward trend in discount sensitivity is observed among older age groups, indicating a slightly higher propensity to purchase when promotions are available.
+  - The **Male** segment demonstrates a relatively stable and consistent upward trend across age groups.
 
-- The **Male** segment demonstrates a relatively stable and consistent upward trend across age groups.
-
-- The **Female** segment shows greater variability, though the overall direction also indicates increasing sensitivity to discounts with age.
+  - The **Female** segment shows greater variability, though the overall direction also indicates increasing sensitivity to discounts with age.
 
 ### Conclusion
 

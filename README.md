@@ -1,5 +1,6 @@
 # eCommerce Analysis: From SQL Discovery to Predictive Insights
 
+> **[🔗 See the Project Presentation (GitHub Pages)](https://nataliib.github.io/Ecommerce-Analytics-DTA/)**
 ## Project Overview
 
 This project is a multi-stage data investigation of an eCommerce dataset focused on identifying true revenue drivers and evaluating customer behavior patterns.
@@ -110,6 +111,7 @@ Move from age-based targeting to:
 
 ## 📂 Project Navigation
 
+- **[🔗 Live Portfolio Presentation](https://nataliib.github.io/Ecommerce-Analytics-DTA/)** — Visual report and interactive dashboards.
 - **report.md** – Full technical analysis, methodology, and detailed visualizations.
 - **notebooks/** – Python scripts for Data Preparation, OLS and Random Forest models.
 - **visuals/** – High-resolution Tableau dashboards and ML plots.
