@@ -247,7 +247,7 @@ Compare two groups of customers: Group A (men) and Group B (women). Also further
 
 - **Stable Pricing Pattern:** Most demographic segments fall within the **₹2,800–₹2,950** range, indicating a consistent and stable pricing strategy across groups.
 > **Chart Screenshot:**
-> ![Impact of Discounts on Average Order Value (AOV)](./visuals/tableau/Average%20Order%20Value%20by%20Age%20Group&Gender.png)
+> ![Impact of Discounts on Average Order Value (AOV)](./visuals/tableau/Discount%20Affinity%20by%20Gender%20&%20Age%20Group.png)
 
 ### Key Insights
 
