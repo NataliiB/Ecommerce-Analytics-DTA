@@ -107,7 +107,7 @@ The resulting dataset serves as a clean foundation for revenue tracking, fulfill
 ### Key Findings
 
 - **Top Categories:** Intimates (8.11%), Jeans (6.86%), Tops & Tees (6.41%), Fashion Hoodies & Sweatshirts (6.41%), Swim (6.17%)  
-- **Most Expensive Orders:** $1,128.95 – $1,372.00  
+- **Most Expensive Orders:** ₹1,128.95 – ₹1,372.00  
 - **Top Countries by Users (>500):**  
   China (33,866), United States (22,731), Brazil (14,500), South Korea (5,420), France (4,652), United Kingdom (4,558)
 
@@ -182,8 +182,8 @@ Create a bar chart that compares the average check (net amount and gross amount)
 > ![Impact of Discounts on Average Order Value (AOV)](./visuals/tableau/Impact%20of%20Discounts%20on%20AOV.png)
 
 ### Key Insights:
-1. **Incentivizing Higher Spending:** The **Avg. Gross Amount** is higher for discounted orders ($3,174.0$) than for full-price orders ($3,106.9$). This suggests that discounts encourage customers to add more expensive items or more products to their cart (Upselling effect).
-2. **Revenue Trade-off:** While discounts increase the "gross" value of the basket, the **Avg. Net Amount** (actual revenue) drops by approximately **6.6%** compared to non-discounted orders ($2,901.2$ vs $3,106.9$).
+1. **Incentivizing Higher Spending:** The **Avg. Gross Amount** is higher for discounted orders (₹3,174.0₹) than for full-price orders (₹3,106.9₹). This suggests that discounts encourage customers to add more expensive items or more products to their cart (Upselling effect).
+2. **Revenue Trade-off:** While discounts increase the "gross" value of the basket, the **Avg. Net Amount** (actual revenue) drops by approximately **6.6%** compared to non-discounted orders (₹2,901.2₹ vs ₹3,106.9₹).
 3. **Strategic Conclusion:** The current discount strategy is effective at increasing the transaction volume and basket size. However, the business should monitor whether the increase in the total number of orders compensates for the lower net profit margin per order.
 
 </details>

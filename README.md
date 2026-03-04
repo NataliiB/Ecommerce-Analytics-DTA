@@ -110,8 +110,8 @@ Move from age-based targeting to:
 
 ## 📂 Project Navigation
 
-- **Report.md** – Full technical analysis, methodology, and detailed visualizations.
-- **notebooks/** – Python scripts for OLS and Random Forest models.
+- **report.md** – Full technical analysis, methodology, and detailed visualizations.
+- **notebooks/** – Python scripts for Data Preparation, OLS and Random Forest models.
 - **visuals/** – High-resolution Tableau dashboards and ML plots.
 - **sql/** – SQL queries used for data exploration.
 
