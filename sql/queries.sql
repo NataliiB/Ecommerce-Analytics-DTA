@@ -15,7 +15,7 @@ LIMIT 1000;
 --Task#2 Top product categories
 
 SELECT category, 
-       ROUND(COUNT(*) * 100/ COALESCE(SUM(COUNT(*)) OVER(), NULL),2) AS percentage
+       ROUND(COUNT(*) * 100.0/ NULLIF(SUM(COUNT(*)) OVER(), 0),2) AS percentage
 FROM `bigquery-public-data.thelook_ecommerce.products`
 GROUP BY category
 ORDER BY percentage DESC
